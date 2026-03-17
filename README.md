@@ -1,4 +1,7 @@
 # JKFLIPFLOP-USING-IF-ELSE
+### Name : Kabilan S
+### Register NO : 212225230119
+### Date: 17/03/2026
 
 **AIM:** 
 
@@ -33,41 +36,62 @@ By using three variable K-Map, we can get the simplified expression for next sta
 The maximum possible groupings of adjacent ones are already shown in the figure. Therefore, the simplified expression for next state Qt+1t+1 is Q(t+1)=JQ(t)′+K′Q(t)Q(t+1)=JQ(t)′+K′Q(t)
 
 **Procedure**
+```
+1.Use module projname(input,output) to start the Verilog programming.
 
-1. Define Inputs/Outputs: Inputs: J (Set), K (Reset), c1k (clock); Outputs: q, qbar (~q).
-2. Initialization: Set q = 0 and qbar = 1 at the start of the simulation.
-3. JK Flip-Flop Logic: On posedge c1k, compute q 
-4. Complementary Output: Update qbar = ~q to maintain complementarity.
-5. Testbench: Simulate with combinations of J, K, and c1k to verify JK Flip-Flop functionality.
+2.Assign inputs and outputs using the word input and output respectively.
+
+3.Use defined keywords like wire,assign and required logic gates to represent the boolean expression.
+
+4.Use each output to represent one for difference and the other for borrow.
+
+5.End the verilog program using keyword endmodule
+```
 
 **PROGRAM**
 ```
- Program for flipflops and verify its truth table in quartus using Verilog programming.
-Developed by: Kabilan S
-RegisterNumber: 212225230119
+module ex7(q, qb,j,k,clock,reset);
+    input j,k,clock,reset;
+    output reg q, qb;
+	 
+always @ (posedge (clock))
 
-module exp7(J,K,c1k,q,qbar);
-input J,K,c1k;
-output reg q;
-output reg qbar;
-initial q=0;
-initial qbar=1;
-always @(posedge c1k)
-begin
-q=((J&(~q)))|((~K)&q);
-qbar=~q;
-end
+    begin 
+        if (!reset)
+            begin
+               q <= q;
+               qb <=qb;
+            end   
+        
+else
+   begin
+	   if(j==0 && k==0)
+		   begin
+			q<=q;
+			qb<=qb;
+			end
+		else if(j!=k)
+		   begin
+			q<=j;
+			qb<=k;
+			end
+		else if(j==1 && k==1)
+		    begin
+			 q<=~q;
+			 qb<=~qb;
+			 end
+	end
+end	
 endmodule
 ```
+Developed by:Sushmitha Gembunathan
+RegisterNumber:212224040642
 
 **RTL LOGIC FOR FLIPFLOPS**
-![image](https://github.com/user-attachments/assets/c325e431-4bda-42d9-bf52-e3e49e661eb0)
-
+![image](https://github.com/user-attachments/assets/36b2f03a-4014-4d55-8ede-1704d1d61c82)
 
 **TIMING DIGRAMS FOR FLIP FLOPS**
-![image](https://github.com/user-attachments/assets/c50cccb4-76ff-44ff-8d28-e798eb142e4c)
-
+![image](https://github.com/user-attachments/assets/9bcb14b5-974a-4550-870b-8c69e059e853)
 
 **RESULTS**
-
-Thus the JK flipflop is implemented and verified.
+The program has been executed successfully.
